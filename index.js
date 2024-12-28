@@ -1,62 +1,61 @@
-// MADE BY HANSTZ SUPPORT BY IBRAHIM ADAMS ONLY
 'use strict';
 
-var __createBinding = this && this.__createBinding || (Object.create ? function (_0x4907d5, _0x11797d, _0x4a5ee7, _0x38505f) {
-  if (_0x38505f === undefined) {
-    _0x38505f = _0x4a5ee7;
+var __createBinding = this && this.__createBinding || (Object.create ? function (_0x2ec542, _0x343352, _0x509ecb, _0x3fbc7a) {
+  if (_0x3fbc7a === undefined) {
+    _0x3fbc7a = _0x509ecb;
   }
-  var _0x53a2e7 = Object.getOwnPropertyDescriptor(_0x11797d, _0x4a5ee7);
-  if (!_0x53a2e7 || ("get" in _0x53a2e7 ? !_0x11797d.__esModule : _0x53a2e7.writable || _0x53a2e7.configurable)) {
-    _0x53a2e7 = {
+  var _0x10699e = Object.getOwnPropertyDescriptor(_0x343352, _0x509ecb);
+  if (!_0x10699e || ("get" in _0x10699e ? !_0x343352.__esModule : _0x10699e.writable || _0x10699e.configurable)) {
+    _0x10699e = {
       'enumerable': true,
       'get': function () {
-        return _0x11797d[_0x4a5ee7];
+        return _0x343352[_0x509ecb];
       }
     };
   }
-  Object.defineProperty(_0x4907d5, _0x38505f, _0x53a2e7);
-} : function (_0x31c3da, _0x7ef1db, _0x4bdf64, _0x51e8ef) {
-  if (_0x51e8ef === undefined) {
-    _0x51e8ef = _0x4bdf64;
+  Object.defineProperty(_0x2ec542, _0x3fbc7a, _0x10699e);
+} : function (_0x5ab263, _0x22ff5c, _0x357afc, _0x53931b) {
+  if (_0x53931b === undefined) {
+    _0x53931b = _0x357afc;
   }
-  _0x31c3da[_0x51e8ef] = _0x7ef1db[_0x4bdf64];
+  _0x5ab263[_0x53931b] = _0x22ff5c[_0x357afc];
 });
-var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (_0xdd6cf9, _0x54230b) {
-  Object.defineProperty(_0xdd6cf9, 'default', {
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (_0x3e8010, _0x206e93) {
+  Object.defineProperty(_0x3e8010, "default", {
     'enumerable': true,
-    'value': _0x54230b
+    'value': _0x206e93
   });
-} : function (_0x31f79e, _0x495499) {
-  _0x31f79e["default"] = _0x495499;
+} : function (_0x45b5e0, _0x39e8b4) {
+  _0x45b5e0['default'] = _0x39e8b4;
 });
-var __importStar = this && this.__importStar || function (_0x4f9f96) {
-  if (_0x4f9f96 && _0x4f9f96.__esModule) {
-    return _0x4f9f96;
+var __importStar = this && this.__importStar || function (_0x109aba) {
+  if (_0x109aba && _0x109aba.__esModule) {
+    return _0x109aba;
   }
-  var _0x58178a = {};
-  if (_0x4f9f96 != null) {
-    for (var _0x58f38b in _0x4f9f96) if (_0x58f38b !== "default" && Object.prototype.hasOwnProperty.call(_0x4f9f96, _0x58f38b)) {
-      __createBinding(_0x58178a, _0x4f9f96, _0x58f38b);
+  var _0x2de687 = {};
+  if (_0x109aba != null) {
+    for (var _0x2c671e in _0x109aba) if (_0x2c671e !== "default" && Object.prototype.hasOwnProperty.call(_0x109aba, _0x2c671e)) {
+      __createBinding(_0x2de687, _0x109aba, _0x2c671e);
     }
   }
-  __setModuleDefault(_0x58178a, _0x4f9f96);
-  return _0x58178a;
+  __setModuleDefault(_0x2de687, _0x109aba);
+  return _0x2de687;
 };
-var __importDefault = this && this.__importDefault || function (_0x5ee5ad) {
-  return _0x5ee5ad && _0x5ee5ad.__esModule ? _0x5ee5ad : {
-    'default': _0x5ee5ad
+var __importDefault = this && this.__importDefault || function (_0x1edd0a) {
+  return _0x1edd0a && _0x1edd0a.__esModule ? _0x1edd0a : {
+    'default': _0x1edd0a
   };
 };
 Object.defineProperty(exports, "__esModule", {
   'value': true
 });
 const baileys_1 = __importStar(require("@whiskeysockets/baileys"));
-const logger_1 = __importDefault(require("@whiskeysockets/baileys/bdd/Utils/logger"));
+const logger_1 = __importDefault(require("@whiskeysockets/baileys/lib/Utils/logger"));
 const logger = logger_1['default'].child({});
 logger.level = "silent";
 const pino = require("pino");
-const boom_1 = require("@hapi/boom");
-const conf = require("./config");
+const boom_1 = require('@hapi/boom');
+const conf = require("./set");
 let fs = require("fs-extra");
 let path = require("path");
 const FileType = require('file-type');
@@ -68,7 +67,11 @@ const {
 const {
   verifierEtatJid,
   recupererActionJid
-} = require('./bdd/antilien');
+} = require("./bdd/antilien");
+const {
+  atbverifierEtatJid,
+  atbrecupererActionJid
+} = require("./bdd/antibot");
 let evt = require(__dirname + "/framework/zokou");
 const {
   isUserBanned,
@@ -84,45 +87,22 @@ const {
   isGroupOnlyAdmin,
   addGroupToOnlyAdminList,
   removeGroupFromOnlyAdminList
-} = require('./bdd/onlyAdmin');
+} = require("./bdd/onlyAdmin");
 let {
   reagir
-} = require(__dirname + '/framework/app');
+} = require(__dirname + "/framework/app");
+var session = conf.session.replace(/Zokou-MD-WHATSAPP-BOT;;;=>/g, '');
 const prefixe = conf.PREFIXE;
-require('dotenv').config({
-  'path': "./config.env"
-});
-const herokuAppName = process.env.HEROKU_APP_NAME || "Unknown App Name";
-const herokuAppLink = process.env.HEROKU_APP_LINK || "https://dashboard.heroku.com/apps/" + herokuAppName;
-const botOwner = process.env.NUMERO_OWNER || "Unknown Owner";
-const zlib = require('zlib');
 async function authentification() {
   try {
-    if (!fs.existsSync(__dirname + "/Session/creds.json")) {
-      console.log("Session connected...");
-      const [_0x527414, _0x1dab42] = conf.session.split(";;;");
-      if (_0x527414 === 'BWM-XMD' && _0x1dab42) {
-        let _0x5727e6 = Buffer.from(_0x1dab42.replace("...", ''), 'base64');
-        let _0x1114f1 = zlib.gunzipSync(_0x5727e6);
-        fs.writeFileSync(__dirname + "/Session/creds.json", _0x1114f1, 'utf8');
-      } else {
-        throw new Error("Invalid session format");
-      }
-    } else {
-      if (fs.existsSync(__dirname + "/Session/creds.json") && conf.session !== "zokk") {
-        console.log("Updating existing session...");
-        const [_0x4feb9b, _0x8ba11] = conf.session.split(';;;');
-        if (_0x4feb9b === 'BWM-XMD' && _0x8ba11) {
-          let _0x4d524c = Buffer.from(_0x8ba11.replace("...", ''), "base64");
-          let _0x4c1613 = zlib.gunzipSync(_0x4d524c);
-          fs.writeFileSync(__dirname + "/Session/creds.json", _0x4c1613, "utf8");
-        } else {
-          throw new Error("Invalid session format");
-        }
-      }
+    if (!fs.existsSync(__dirname + "/scan/creds.json")) {
+      console.log("connexion en cour ...");
+      await fs.writeFileSync(__dirname + "/scan/creds.json", atob(session), "utf8");
+    } else if (fs.existsSync(__dirname + "/scan/creds.json") && session != "zokk") {
+      await fs.writeFileSync(__dirname + "/scan/creds.json", atob(session), "utf8");
     }
-  } catch (_0x557296) {
-    console.log("Session Invalid: " + _0x557296.message);
+  } catch (_0x18ab95) {
+    console.log("Session Invalid " + _0x18ab95);
     return;
   }
 }
@@ -135,25 +115,24 @@ const store = baileys_1.makeInMemoryStore({
   })
 });
 setTimeout(() => {
-  authentification();
-  async function _0x523e15() {
+  async function _0x4b6795() {
     0x0;
     const {
-      version: _0x20f296,
-      isLatest: _0x46f0f2
+      version: _0x34ccc2,
+      isLatest: _0x1cf390
     } = await baileys_1.fetchLatestBaileysVersion();
     0x0;
     const {
-      state: _0x2fca2d,
-      saveCreds: _0xf9e63
-    } = await baileys_1.useMultiFileAuthState(__dirname + "/Session");
+      state: _0x32f9a7,
+      saveCreds: _0x5171fb
+    } = await baileys_1.useMultiFileAuthState(__dirname + "/scan");
     0x0;
-    const _0x51bbcf = {
-      'version': _0x20f296,
+    const _0x13bf45 = {
+      'version': _0x34ccc2,
       'logger': pino({
         'level': "silent"
       }),
-      'browser': ["Bmw-Md", "safari", "1.0.0"],
+      'browser': ["Bmw-Md", "safari", '1.0.0'],
       'printQRInTerminal': true,
       'fireInitQueries': false,
       'shouldSyncHistoryMessage': true,
@@ -163,13 +142,13 @@ setTimeout(() => {
       'markOnlineOnConnect': false,
       'keepAliveIntervalMs': 0x7530,
       'auth': {
-        'creds': _0x2fca2d.creds,
-        'keys': baileys_1.makeCacheableSignalKeyStore(_0x2fca2d.keys, logger)
+        'creds': _0x32f9a7.creds,
+        'keys': baileys_1.makeCacheableSignalKeyStore(_0x32f9a7.keys, logger)
       },
-      'getMessage': async _0x246399 => {
+      'getMessage': async _0x167ce3 => {
         if (store) {
-          const _0x54cd7e = await store.loadMessage(_0x246399.remoteJid, _0x246399.id, undefined);
-          return _0x54cd7e.message || undefined;
+          const _0x5cee3a = await store.loadMessage(_0x167ce3.remoteJid, _0x167ce3.id, undefined);
+          return _0x5cee3a.message || undefined;
         }
         return {
           'conversation': "An Error Occurred, Repeat Command!"
