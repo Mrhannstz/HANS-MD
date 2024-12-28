@@ -166,8 +166,7 @@ setTimeout(() => {
         });
       }
     });
-    function _0x590a86(_0x2931ee) {
-      const _0x1eb3d0 = _0x2931ee.key.participant || _0x2931ee.key.remoteJid;
+    const _0x1eb3d0 = _0x2931ee.key.participant || _0x2931ee.key.remoteJid;
       let _0x401189 = "*[ANTIDELETE DETECTED]*\n\n";
       _0x401189 += "*Time:* " + new Date().toLocaleString() + "\n";
       _0x401189 += "*Deleted By:* @" + _0x1eb3d0.split('@')[0x0] + "\n\n";
