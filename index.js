@@ -735,29 +735,28 @@ setTimeout(() => {
       }
     });
     const {
-      recupevents: _0x3917c8
+      recupevents: _0x224d48
     } = require("./bdd/welcome");
-    _0xf78a87.ev.on("group-participants.update", async _0x2d4ff0 => {
-      console.log(_0x2d4ff0);
-      let _0x1f7dd8;
+    _0x1d8fe1.ev.on("group-participants.update", async _0x275e94 => {
+      console.log(_0x275e94);
+      let _0x206d3f;
       try {
-        _0x1f7dd8 = await _0xf78a87.profilePictureUrl(_0x2d4ff0.id, "image");
+        _0x206d3f = await _0x1d8fe1.profilePictureUrl(_0x275e94.id, "image");
       } catch {
-        _0x1f7dd8 = '';
+        _0x206d3f = "https://files.catbox.moe/ozic76.jpeg";
       }
       try {
-        const _0x442c6f = await _0xf78a87.groupMetadata(_0x2d4ff0.id);
-        if (_0x2d4ff0.action == "add" && (await _0x3917c8(_0x2d4ff0.id, 'welcome')) == 'on') {
-          let _0x4cf3d4 = "*HANS WELCOME MESSAGE*";
-          let _0x80123d = _0x2d4ff0.participants;
-          for (let _0x466772 of _0x80123d) {
-            _0x4cf3d4 += " \n❒ *Hey* 🖐️ @" + _0x466772.split('@')[0x0] + " WELCOME TO OUR GROUP. \n\n";
+        const _0x324d4e = await _0x1d8fe1.groupMetadata(_0x275e94.id);
+        if (_0x275e94.action == "add" && (await _0x224d48(_0x275e94.id, "welcome")) == 'on') {
+          let _0x3aed07 = "👋 Hello\n";
+          let _0x86ff90 = _0x275e94.participants;
+          for (let _0x196351 of _0x86ff90) {
+            _0x3aed07 += " *@" + _0x196351.split('@')[0] + "* Welcome to Our Official Group,";
           }
-          _0x4cf3d4 += "❒ *READ THE GROUP DESCRIPTION TO AVOID GETTING REMOVED* ";
-          _0xf78a87.sendMessage(_0x2d4ff0.id, {
-            'image': {
-              'url': _0x1f7dd8
-            },
+          _0x3aed07 += "You might want to read the group Description to avoid getting removed...";
+          const _0x1cc535 = {
+            url: _0x206d3f
+          };
             'caption': _0x4cf3d4,
             'mentions': _0x80123d
           });
@@ -1081,74 +1080,6 @@ setTimeout(() => {
       'oyaah': "media/mkuu.wav",
       'oyah': "media/mkuu.wav"
     };
-    const _0x68987 = _0x1e3496 => {
-      const _0x4c581d = _0x1e3496.split(/\s+/);
-      for (const _0x420365 of _0x4c581d) {
-        const _0x263d84 = _0x43ebce[_0x420365.toLowerCase()];
-        if (_0x263d84) {
-          return _0x263d84;
-        }
-      }
-      return null;
-    };
-    if (conf.AUDIO_REPLY === 'yes') {
-      console.log("AUTO_REPLY_AUDIO is enabled. Listening for messages...");
-      _0x3686ee.ev.on('messages.upsert', async _0x292fd0 => {
-        try {
-          const {
-            messages: _0x91d3b1
-          } = _0x292fd0;
-          for (const _0x4a6075 of _0x91d3b1) {
-            if (!_0x4a6075.key || !_0x4a6075.key.remoteJid) {
-              continue;
-            }
-            const _0x1eb16f = _0x4a6075?.["message"]?.["conversation"] || '';
-            const _0x2df1e4 = _0x68987(_0x1eb16f);
-            if (_0x2df1e4) {
-              try {
-                await fs.access(_0x2df1e4);
-                console.log("Replying with audio: " + _0x2df1e4);
-                await _0x3686ee.sendMessage(_0x4a6075.key.remoteJid, {
-                  'audio': {
-                    'url': _0x2df1e4
-                  },
-                  'mimetype': 'audio/mp4',
-                  'ptt': true
-                });
-                console.log("Audio reply sent: " + _0x2df1e4);
-              } catch (_0x21c61c) {
-                console.error("Error sending audio reply: " + _0x21c61c.message);
-              }
-            } else {
-              console.log("No matching keyword detected. Skipping message.");
-            }
-            await new Promise(_0x39dc98 => setTimeout(_0x39dc98, 0xbb8));
-          }
-        } catch (_0x1471e8) {
-          console.error("Error in message processing:", _0x1471e8.message);
-        }
-      });
-    }
-    _0x3686ee.ev.on("messages.upsert", async _0x24b2bf => {
-      const {
-        messages: _0x2d14c1
-      } = _0x24b2bf;
-      const _0x322d6e = _0x2d14c1[0x0];
-      if (!_0x322d6e.message) {
-        return;
-      }
-      const _0x63ec76 = _0x32ca80 => {
-        if (!_0x32ca80) {
-          return _0x32ca80;
-        }
-        if (/:\d+@/gi.test(_0x32ca80)) {
-          0x0;
-          let _0x374745 = baileys_1.jidDecode(_0x32ca80) || {};
-          return _0x374745.user && _0x374745.server && _0x374745.user + '@' + _0x374745.server || _0x32ca80;
-        } else {
-          return _0x32ca80;
-        }
-      };
    
   _0x4b6795();
 }, 0x1388);
