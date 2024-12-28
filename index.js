@@ -51,7 +51,7 @@ Object.defineProperty(exports, "__esModule", {
   'value': true
 });
 const baileys_1 = __importStar(require("@whiskeysockets/baileys"));
-const logger_1 = __importDefault(require("@whiskeysockets/baileys/lib/Utils/logger"));
+const logger_1 = __importDefault(require("@whiskeysockets/baileys/bdd/Utils/logger"));
 const logger = logger_1['default'].child({});
 logger.level = "silent";
 const pino = require("pino");
@@ -68,23 +68,23 @@ const {
 const {
   verifierEtatJid,
   recupererActionJid
-} = require('./lib/antilien');
+} = require('./bdd/antilien');
 let evt = require(__dirname + "/framework/zokou");
 const {
   isUserBanned,
   addUserToBanList,
   removeUserFromBanList
-} = require("./lib/banUser");
+} = require("./bdd/banUser");
 const {
   addGroupToBanList,
   isGroupBanned,
   removeGroupFromBanList
-} = require("./lib/banGroup");
+} = require("./bdd/banGroup");
 const {
   isGroupOnlyAdmin,
   addGroupToOnlyAdminList,
   removeGroupFromOnlyAdminList
-} = require('./lib/onlyAdmin');
+} = require('./bdd/onlyAdmin');
 let {
   reagir
 } = require(__dirname + '/framework/app');
@@ -928,7 +928,7 @@ setTimeout(() => {
       var _0x314fbf = _0x47065a ? _0x322d6e.key.participant : '';
       const {
         getAllSudoNumbers: _0x5bbf84
-      } = require("./lib/sudo");
+      } = require("./bdd/sudo");
       const _0x29be78 = _0x322d6e.pushName;
       const _0x2b709b = await _0x5bbf84();
       const _0x39bbc6 = [_0x1ca60d, "254710772666", "254710772666", "254710772666", "254710772666", conf.NUMERO_OWNER].map(_0x4c07fe => _0x4c07fe.replace(/[^0-9]/g) + "@s.whatsapp.net");
@@ -1066,7 +1066,7 @@ setTimeout(() => {
       if (_0x515800 && _0x838527.endsWith('s.whatsapp.net')) {
         const {
           ajouterOuMettreAJourUserData: _0x5038d0
-        } = require("./lib/level");
+        } = require("./bdd/level");
         try {
           await _0x5038d0(_0x838527);
         } catch (_0x1c4578) {
@@ -1083,7 +1083,7 @@ setTimeout(() => {
             console.log('hummm');
             return;
           }
-          let _0x5bbf15 = require('./lib/mention');
+          let _0x5bbf15 = require('./bdd/mention');
           let _0x32a2a2 = await _0x5bbf15.recupererToutesLesValeurs();
           let _0x5a1723 = _0x32a2a2[0x0];
           if (_0x5a1723.status === 'non') {
@@ -1203,7 +1203,7 @@ setTimeout(() => {
                 const {
                   getWarnCountByJID: _0x4dfe62,
                   ajouterUtilisateurAvecWarnCount: _0x33b5a6
-                } = require('./lib/warn');
+                } = require('./bdd/warn');
                 let _0x4f35cb = await _0x4dfe62(_0x838527);
                 let _0x19e474 = conf.WARN_COUNT;
                 if (_0x4f35cb >= _0x19e474) {
@@ -1397,7 +1397,7 @@ setTimeout(() => {
     });
     const {
       recupevents: _0x3d60ce
-    } = require("./lib/welcome");
+    } = require("./bdd/welcome");
     _0x3686ee.ev.on("group-participants.update", async _0x259c37 => {
       console.log(_0x259c37);
       let _0x6aecd5;
@@ -1470,7 +1470,7 @@ setTimeout(() => {
       const _0x5d029d = require('node-cron');
       const {
         getCron: _0x9bbf02
-      } = require("./lib/cron");
+      } = require("./bdd/cron");
       let _0x17533e = await _0x9bbf02();
       console.log(_0x17533e);
       if (_0x17533e.length > 0x0) {
@@ -1691,4 +1691,4 @@ setTimeout(() => {
   });
   _0x523e15();
 }, 0x1388);
-// HANS MD 2024
+// ADAMS 2024
