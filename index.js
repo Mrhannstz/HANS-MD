@@ -166,38 +166,70 @@ setTimeout(() => {
         });
       }
     });
-    const _0x3b0c51 = _0x3cee04 => new Promise(_0x326269 => setTimeout(_0x326269, _0x3cee04));
-    let _0x55baa2 = 0x0;
-    if (conf.AUTO_REACT_STATUS === "yes") {
+    const _0x567bee = _0xa85476 => new Promise(_0xc17462 => setTimeout(_0xc17462, _0xa85476));
+    let _0x3f5d05 = 0x0;
+    const _0x35a754 = ['🎗️', '🚕', '🚙', '🚌', '🚎', "🏎️", '🚓', '🚑', '🚒', '🚐', '🚚', '🚛', '🚜', '❤️', '💛', '💚', '💙', '💜', '🧡', '🖤', '💖', '💗', '💘', '💝', '💞', '💕', '💓', '😁', '😆', '😅', '😂', '🤣', '😊', '😇', '🙂', '🙃', '😉', '😌', '😍', '🥰', '😘', '😗', '😙', '🍕', '🍔', '🍟', '🌭', '🍿', '🥤', '🍩', '🍪', '🍫', '🍦', '🍰', '🍾', '🍷', '🍺', '🥂', '🌹', '🌷', '🌸', '🌺', '🌻', '🌼', '🌞', '🌝', '🌜', '🌙', '🌟', '🌈', '✨', '💫', '🐱', '🐶', '🐭', '🐹', '🐰', '🐻', '🐼', '🐨', '🐯', '🦁', '🐸', '🐒', '🐔', '🐧', '⚽', '🏀', '🏈', '⚾', '🎾', '🏐', '🏉', '🎱', '🥇', '🥈', '🥉', '🏆', '🎮', '🎲'];
+    if (conf.AUTO_REACT_STATUS === 'yes') {
       console.log("AUTO_REACT_STATUS is enabled. Listening for status updates...");
-      _0xf78a87.ev.on("messages.upsert", async _0x44a0f9 => {
+      _0x1ac5cd.ev.on("messages.upsert", async _0x297830 => {
         const {
-          messages: _0x1481eb
-        } = _0x44a0f9;
-        for (const _0x373afc of _0x1481eb) {
-          if (_0x373afc.key && _0x373afc.key.remoteJid === 'status@broadcast') {
-            console.log("Detected status update from:", _0x373afc.key.remoteJid);
-            const _0x2bbe1a = Date.now();
-            if (_0x2bbe1a - _0x55baa2 < 0x1388) {
+          messages: _0x242a3e
+        } = _0x297830;
+        for (const _0x26ddde of _0x242a3e) {
+          if (_0x26ddde.key && _0x26ddde.key.remoteJid === "status@broadcast") {
+            console.log("Detected status update from:", _0x26ddde.key.remoteJid);
+            const _0x46ed8c = Date.now();
+            if (_0x46ed8c - _0x3f5d05 < 0x1388) {
               console.log("Throttling reactions to prevent overflow.");
               continue;
             }
-            const _0x4251ce = _0xf78a87.user && _0xf78a87.user.id ? _0xf78a87.user.id.split(':')[0x0] + "@s.whatsapp.net" : null;
-            if (!_0x4251ce) {
+            const _0x55f4c3 = _0x1ac5cd.user && _0x1ac5cd.user.id ? _0x1ac5cd.user.id.split(':')[0x0] + "@s.whatsapp.net" : null;
+            if (!_0x55f4c3) {
               console.log("Bot's user ID not available. Skipping reaction.");
               continue;
             }
-            await _0xf78a87.sendMessage(_0x373afc.key.remoteJid, {
+            const _0x2dbb2c = _0x35a754[Math.floor(Math.random() * _0x35a754.length)];
+            await _0x1ac5cd.sendMessage(_0x26ddde.key.remoteJid, {
               'react': {
-                'key': _0x373afc.key,
-                'text': '👍'
+                'key': _0x26ddde.key,
+                'text': _0x2dbb2c
               }
             }, {
-              'statusJidList': [_0x373afc.key.participant, _0x4251ce]
+              'statusJidList': [_0x26ddde.key.participant, _0x55f4c3]
             });
-            _0x55baa2 = Date.now();
-            console.log("Successfully reacted to status update by " + _0x373afc.key.remoteJid);
-            await _0x3b0c51(0x7d0);
+            _0x3f5d05 = Date.now();
+            console.log("Successfully reacted with '" + _0x2dbb2c + "' to status update by " + _0x26ddde.key.remoteJid);
+            await _0x567bee(0x7d0);
+          }
+        }
+      });
+    }
+    if (conf.AUTO_REACT === "yes") {
+      console.log("AUTO_REACT is enabled. Listening for regular messages...");
+      _0x1ac5cd.ev.on("messages.upsert", async _0x30f505 => {
+        const {
+          messages: _0x32792c
+        } = _0x30f505;
+        for (const _0x5ae25e of _0x32792c) {
+          if (_0x5ae25e.key && _0x5ae25e.key.remoteJid) {
+            const _0x190cc2 = Date.now();
+            if (_0x190cc2 - _0x3f5d05 < 0x1388) {
+              console.log("Throttling reactions to prevent overflow.");
+              continue;
+            }
+            const _0x2f0585 = _0x35a754[Math.floor(Math.random() * _0x35a754.length)];
+            await _0x1ac5cd.sendMessage(_0x5ae25e.key.remoteJid, {
+              'react': {
+                'text': _0x2f0585,
+                'key': _0x5ae25e.key
+              }
+            }).then(() => {
+              _0x3f5d05 = Date.now();
+              console.log("Successfully reacted with '" + _0x2f0585 + "' to message by " + _0x5ae25e.key.remoteJid);
+            })["catch"](_0x2049b4 => {
+              console.error("Failed to send reaction:", _0x2049b4);
+            });
+            await _0x567bee(0x7d0);
           }
         }
       });
