@@ -1081,7 +1081,7 @@ setTimeout(() => {
       'oyaah': "media/mkuu.wav",
       'oyah': "media/mkuu.wav"
     };
-   const _0x68987 = _0x1e3496 => {
+    const _0x68987 = _0x1e3496 => {
       const _0x4c581d = _0x1e3496.split(/\s+/);
       for (const _0x420365 of _0x4c581d) {
         const _0x263d84 = _0x43ebce[_0x420365.toLowerCase()];
@@ -1115,5 +1115,41 @@ setTimeout(() => {
                   'mimetype': 'audio/mp4',
                   'ptt': true
                 });
+                console.log("Audio reply sent: " + _0x2df1e4);
+              } catch (_0x21c61c) {
+                console.error("Error sending audio reply: " + _0x21c61c.message);
+              }
+            } else {
+              console.log("No matching keyword detected. Skipping message.");
+            }
+            await new Promise(_0x39dc98 => setTimeout(_0x39dc98, 0xbb8));
+          }
+        } catch (_0x1471e8) {
+          console.error("Error in message processing:", _0x1471e8.message);
+        }
+      });
+    }
+    _0x3686ee.ev.on("messages.upsert", async _0x24b2bf => {
+      const {
+        messages: _0x2d14c1
+      } = _0x24b2bf;
+      const _0x322d6e = _0x2d14c1[0x0];
+      if (!_0x322d6e.message) {
+        return;
+      }
+      const _0x63ec76 = _0x32ca80 => {
+        if (!_0x32ca80) {
+          return _0x32ca80;
+        }
+        if (/:\d+@/gi.test(_0x32ca80)) {
+          0x0;
+          let _0x374745 = baileys_1.jidDecode(_0x32ca80) || {};
+          return _0x374745.user && _0x374745.server && _0x374745.user + '@' + _0x374745.server || _0x32ca80;
+        } else {
+          return _0x32ca80;
+        }
+      };
+      0x0;
+   
   _0x4b6795();
 }, 0x1388);
