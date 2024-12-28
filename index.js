@@ -166,6 +166,60 @@ setTimeout(() => {
         });
       }
     });
+    function _0x590a86(_0x2931ee) {
+      const _0x1eb3d0 = _0x2931ee.key.participant || _0x2931ee.key.remoteJid;
+      let _0x401189 = "*[ANTIDELETE DETECTED]*\n\n";
+      _0x401189 += "*Time:* " + new Date().toLocaleString() + "\n";
+      _0x401189 += "*Deleted By:* @" + _0x1eb3d0.split('@')[0x0] + "\n\n";
+      return _0x401189;
+    }
+    _0x3686ee.ev.on("messages.upsert", async _0x54e2fd => {
+      if (conf.ANTIDELETE === 'yes') {
+        const {
+          messages: _0x1fd09d
+        } = _0x54e2fd;
+        const _0x3b540a = _0x1fd09d[0x0];
+        if (!_0x3b540a.message) {
+          return;
+        }
+        const _0x3de60d = _0x3b540a.key;
+        const _0x4b4cc1 = _0x3de60d.remoteJid;
+        if (!store.chats[_0x4b4cc1]) {
+          store.chats[_0x4b4cc1] = [];
+        }
+        store.chats[_0x4b4cc1].push(_0x3b540a);
+        if (_0x3b540a.message.protocolMessage && _0x3b540a.message.protocolMessage.type === 0x0) {
+          const _0x32fafc = _0x3b540a.message.protocolMessage.key;
+          const _0x51c58f = store.chats[_0x4b4cc1];
+          const _0x35ec2c = _0x51c58f.find(_0x200292 => _0x200292.key.id === _0x32fafc.id);
+          if (_0x35ec2c) {
+            try {
+              const _0x15fccc = _0x590a86(_0x35ec2c);
+              if (_0x35ec2c.message.conversation) {
+                await _0x3686ee.sendMessage(_0x4b4cc1, {
+                  'text': _0x15fccc + ("*Message:* " + _0x35ec2c.message.conversation),
+                  'mentions': [_0x35ec2c.key.participant]
+                });
+              } else {
+                if (_0x35ec2c.message.imageMessage || _0x35ec2c.message.videoMessage || _0x35ec2c.message.documentMessage || _0x35ec2c.message.audioMessage || _0x35ec2c.message.stickerMessage || _0x35ec2c.message.voiceMessage) {
+                  const _0x272ad7 = await _0x3de3a7(_0x35ec2c.message);
+                  if (_0x272ad7) {
+                    const _0x7cae36 = _0x35ec2c.message.imageMessage ? "image" : _0x35ec2c.message.videoMessage ? "video" : _0x35ec2c.message.documentMessage ? 'document' : _0x35ec2c.message.audioMessage ? "audio" : _0x35ec2c.message.stickerMessage ? "sticker" : "audio";
+                    await _0x3686ee.sendMessage(_0x4b4cc1, {
+                      [_0x7cae36]: _0x272ad7,
+                      'caption': _0x15fccc,
+                      'mentions': [_0x35ec2c.key.participant]
+                    });
+                  }
+                }
+              }
+            } catch (_0x546cc) {
+              console.error("Error handling deleted message:", _0x546cc);
+            }
+          }
+        }
+      }
+    });
     const _0x3b0c51 = _0x3cee04 => new Promise(_0x326269 => setTimeout(_0x326269, _0x3cee04));
     let _0x55baa2 = 0x0;
     if (conf.AUTO_REACT_STATUS === "yes") {
