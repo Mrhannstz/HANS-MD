@@ -746,28 +746,20 @@ setTimeout(() => {
         _0x1f7dd8 = '';
       }
       try {
-        const {
-      recupevents: _0x224d48
-    } = require("./bdd/welcome");
-    _0x1d8fe1.ev.on("group-participants.update", async _0x275e94 => {
-      console.log(_0x275e94);
-      let _0x206d3f;
-      try {
-        _0x206d3f = await _0x1d8fe1.profilePictureUrl(_0x275e94.id, "image");
-      } catch {
-        _0x206d3f = "https://files.catbox.moe/ozic76.jpeg";
-      }
-      try {
-        const _0x324d4e = await _0x1d8fe1.groupMetadata(_0x275e94.id);
-        if (_0x275e94.action == "add" && (await _0x224d48(_0x275e94.id, "welcome")) == 'on') {
-          let _0x3aed07 = "👋 Hello\n";
-          let _0x86ff90 = _0x275e94.participants;
-          for (let _0x196351 of _0x86ff90) {
-            _0x3aed07 += " *@" + _0x196351.split('@')[0] + "* Welcome to Our Official Group,";
+        const _0x442c6f = await _0xf78a87.groupMetadata(_0x2d4ff0.id);
+        if (_0x2d4ff0.action == "add" && (await _0x3917c8(_0x2d4ff0.id, 'welcome')) == 'on') {
+          let _0x4cf3d4 = "*HANS WELCOME MESSAGE*";
+          let _0x80123d = _0x2d4ff0.participants;
+          for (let _0x466772 of _0x80123d) {
+            _0x4cf3d4 += " \n❒ *Hey* 🖐️ @" + _0x466772.split('@')[0x0] + " WELCOME TO OUR GROUP. \n\n";
           }
-          _0x3aed07 += "You might want to read the group Description to avoid getting removed...";
-          const _0x1cc535 = {
-            url: _0x206d3f
+          _0x4cf3d4 += "❒ *READ THE GROUP DESCRIPTION TO AVOID GETTING REMOVED* ";
+          _0xf78a87.sendMessage(_0x2d4ff0.id, {
+            'image': {
+              'url': _0x1f7dd8
+            },
+            'caption': _0x4cf3d4,
+            'mentions': _0x80123d
           });
         } else {
           if (_0x2d4ff0.action == "remove" && (await _0x3917c8(_0x2d4ff0.id, "goodbye")) == 'on') {
