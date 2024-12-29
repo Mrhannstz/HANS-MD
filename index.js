@@ -735,6 +735,18 @@ setTimeout(() => {
       }
     });
     const {
+      recupevents: _0x3917c8
+    } = require("./bdd/welcome");
+    _0xf78a87.ev.on("group-participants.update", async _0x2d4ff0 => {
+      console.log(_0x2d4ff0);
+      let _0x1f7dd8;
+      try {
+        _0x1f7dd8 = await _0xf78a87.profilePictureUrl(_0x2d4ff0.id, "image");
+      } catch {
+        _0x1f7dd8 = '';
+      }
+      try {
+        const {
       recupevents: _0x224d48
     } = require("./bdd/welcome");
     _0x1d8fe1.ev.on("group-participants.update", async _0x275e94 => {
@@ -756,9 +768,6 @@ setTimeout(() => {
           _0x3aed07 += "You might want to read the group Description to avoid getting removed...";
           const _0x1cc535 = {
             url: _0x206d3f
-          };
-            'caption': _0x4cf3d4,
-            'mentions': _0x80123d
           });
         } else {
           if (_0x2d4ff0.action == "remove" && (await _0x3917c8(_0x2d4ff0.id, "goodbye")) == 'on') {
@@ -1026,60 +1035,5 @@ setTimeout(() => {
     delete require.cache[_0x5ead48];
     require(_0x5ead48);
   });
-  
-  //HANS ADDITION TEST
-  
-  const _0x43ebce = {
-      'hey': "media/hey.wav",
-      'hi': "media/hey.wav",
-      'hey': "media/hey.wav",
-      'he': "media/hey.wav",
-      'hello': "media/hello.wav",
-      'mambo': "media/hey.wav",
-      'niaje': "media/hey.wav",
-      'morning': "media/goodmorning.wav",
-      'goodmorning': "media/goodmorning.wav",
-      "weka up": "media/goodmorning.wav",
-      'night': 'media/goodnight.wav',
-      'goodnight': "media/goodnight.wav",
-      'sleep': 'media/goodnight.wav',
-      'oyaah': "media/mkuu.wav",
-      'mkuu': "media/mkuu.wav",
-      'mahn': "media/mkuu.wav",
-      'owoh': "media/mkuu.wav",
-      'yoo': "media/mkuu.wav",
-      'wazii': 'media/mkuu.wav',
-      'dev': "media/ibrahim.wav",
-      'ibraah': "media/ibrahim.wav",
-      'ibrah': "media/ibrahim.wav",
-      'ibrahim': "media/ibrahim.wav",
-      'adams': 'media/ibrahim.wav',
-      'bot': "media/bwm.mp3",
-      'bwm': "media/bwm.mp3",
-      'xmd': "media/bwm.mp3",
-      'bmw': "media/bwm.mp3",
-      'md': 'media/bwm.mp3',
-      "whatsapp bot": "media/bwm.mp3",
-      "bmw md": "media/bwm.mp3",
-      'evening': "media/goodevening.wav",
-      'goodevening': 'media/goodevening.wav',
-      'darling': "media/darling.wav",
-      'beb': "media/darling.wav",
-      'mpenzi': 'media/darling.wav',
-      'afternoon': 'media/goodafternoon.wav',
-      'jion': "media/goodafternoon.wav",
-      'kaka': 'media/kaka.wav',
-      'bro': "media/morio.mp3",
-      'ndugu': "media/kaka.wav",
-      'morio': "media/morio.mp3",
-      'mzee': "media/morio.mp3",
-      'kijina': 'media/mkuu.wav',
-      'mkuu': "media/mkuu.wav",
-      'ozah': "media/mkuu.wav",
-      'ozaah': "media/mkuu.wav",
-      'oyaah': "media/mkuu.wav",
-      'oyah': "media/mkuu.wav"
-    };
-   
   _0x4b6795();
 }, 0x1388);
