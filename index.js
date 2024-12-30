@@ -166,70 +166,61 @@ setTimeout(() => {
         });
       }
     });
-    const _0x3b0c51 = _0x3cee04 => new Promise(_0x326269 => setTimeout(_0x326269, _0x3cee04));
-let _0x55baa2 = 0x0;
-
-// Array of emoji reactions (more than 100 emojis)
-const emojiReactions = [
-  '👍', '😊', '😁', '🔥', '🎉', '💯', '👏', '❤️', '😂', '😎',
-  '😄', '🎊', '🙌', '🌟', '👌', '🥳', '🤩', '🙏', '😅', '💖',
-  '✨', '😍', '💪', '🥰', '🎂', '🎁', '🤗', '😇', '😜', '😃',
-  '🙋', '💥', '🎆', '😱', '😌', '😋', '😝', '😻', '🌈', '💐',
-  '🌺', '🌸', '🌼', '☀️', '⭐', '🌙', '💎', '🥂', '🍻', '🤑',
-  '🤓', '😇', '😏', '😲', '🙃', '😤', '🤔', '💔', '😢', '😭',
-  '😡', '😠', '👀', '🤷‍♀️', '🤷‍♂️', '✌️', '💌', '🤍', '🖤', '💜',
-  '💙', '💚', '🧡', '🤎', '🍀', '🌹', '💋', '👋', '🤘', '🎶',
-  '🎵', '🎧', '💤', '🎨', '🧘‍♀️', '🧘‍♂️', '🍕', '🍩', '🍔', '🍎',
-  '🌮', '🍹', '🍫', '🍪', '🎳', '🎮', '📱', '🎸', '🎻', '🎷',
-  '🥁', '🎯', '🚀', '✈️', '🚗', '🏆', '🥇', '🏅', '🏀', '⚽',
-  '🏈', '🏐', '🏓', '🏸', '🛹', '⛷️', '🏂', '🚴‍♀️', '🚴‍♂️', '🏊‍♀️'
+const STATUS_REACTION_EMOJIS = [
+  '❤️', '🔥', '😂', '😍', '😎', '👍', '💯', '🎉', '✨', '🌟', '⚡', '🎶', '💖',
+  '🌈', '💥', '🥳', '👑', '💪', '😜', '🙌', '🎊', '🌺', '💎', '🦋', '🍀', '🌞'
 ];
 
-// Check if AUTO_REACT_STATUS is enabled
-if (conf.AUTO_REACT_STATUS === "yes") {
-  console.log("AUTO_REACT_STATUS is enabled. Listening for status updates...");
+// Throttle time to prevent spamming (in milliseconds)
+const THROTTLE_TIME = 5000;
+let lastReactionTime = 0;
 
-  _0xf78a87.ev.on("messages.upsert", async _0x44a0f9 => {
-    const {
-      messages: _0x1481eb
-    } = _0x44a0f9;
+console.log("AUTO_REACT to WhatsApp Status Updates is enabled.");
 
-    for (const _0x373afc of _0x1481eb) {
-      if (_0x373afc.key && _0x373afc.key.remoteJid === 'status@broadcast') {
-        console.log("Detected status update from:", _0x373afc.key.remoteJid);
+// Listen for status updates
+_waInstance.ev.on("messages.upsert", async (event) => {
+  const { messages } = event;
 
-        const _0x2bbe1a = Date.now();
-        if (_0x2bbe1a - _0x55baa2 < 0x1388) {
-          console.log("Throttling reactions to prevent overflow.");
-          continue;
-        }
+  for (const message of messages) {
+    // Check if the message is a status update
+    if (message.key.remoteJid === "status@broadcast") {
+      console.log("Detected status update from:", message.key.participant || "unknown");
 
-        const _0x4251ce = _0xf78a87.user && _0xf78a87.user.id ? _0xf78a87.user.id.split(':')[0x0] + "@s.whatsapp.net" : null;
-        if (!_0x4251ce) {
-          console.log("Bot's user ID not available. Skipping reaction.");
-          continue;
-        }
+      // Prevent spamming with throttle time
+      const currentTime = Date.now();
+      if (currentTime - lastReactionTime < THROTTLE_TIME) {
+        console.log("Throttling reactions to prevent spam.");
+        continue;
+      }
 
-        // Randomly select an emoji from the array
-        const randomEmoji = emojiReactions[Math.floor(Math.random() * emojiReactions.length)];
+      // Select a random emoji
+      const randomEmoji = STATUS_REACTION_EMOJIS[Math.floor(Math.random() * STATUS_REACTION_EMOJIS.length)];
 
-        // Send the emoji reaction
-        await _0xf78a87.sendMessage(_0x373afc.key.remoteJid, {
-          'react': {
-            'key': _0x373afc.key,
-            'text': randomEmoji
+      // Send the reaction
+      try {
+        await _waInstance.sendMessage(
+          message.key.remoteJid,
+          {
+            react: {
+              key: message.key,
+              text: randomEmoji,
+            },
           }
-        }, {
-          'statusJidList': [_0x373afc.key.participant, _0x4251ce]
-        });
+        );
+        console.log(`Reacted to status from ${message.key.participant} with ${randomEmoji}`);
 
-        _0x55baa2 = Date.now();
-        console.log(`Successfully reacted to status update by ${_0x373afc.key.remoteJid} with ${randomEmoji}`);
-        await _0x3b0c51(0x7d0);
+        // Update the last reaction time
+        lastReactionTime = currentTime;
+
+        // Add a small delay for smooth execution
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+      } catch (error) {
+        console.error("Failed to send reaction:", error);
       }
     }
-  });
-}
+  }
+});
+
     _0xf78a87.ev.on('messages.upsert', async _0x1a40f6 => {
       const {
         messages: _0x845c93
