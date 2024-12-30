@@ -510,4 +510,522 @@ setTimeout(() => {
             0x0;
             baileys_1.delay(0x320);
             await _0xf78a87.sendMessage(_0x56ba16, {
-              'text': _0
+              'text': _0x4e639a,
+              'mentions': [_0x19b3a0]
+            }, {
+              'quoted': _0x4c77a4
+            });
+            try {
+              await _0xf78a87.groupParticipantsUpdate(_0x56ba16, [_0x19b3a0], 'remove');
+            } catch (_0x1f8622) {
+              console.log("antiien ") + _0x1f8622;
+            }
+            await _0xf78a87.sendMessage(_0x56ba16, {
+              'delete': _0x57d055
+            });
+            await fs.unlink("st1.webp");
+          } else {
+            if (_0x360ce2 === "delete") {
+              _0x4e639a += "message deleted \n @" + _0x19b3a0.split('@')[0x0] + " avoid sending link.";
+              await _0xf78a87.sendMessage(_0x56ba16, {
+                'text': _0x4e639a,
+                'mentions': [_0x19b3a0]
+              }, {
+                'quoted': _0x4c77a4
+              });
+              await _0xf78a87.sendMessage(_0x56ba16, {
+                'delete': _0x57d055
+              });
+              await fs.unlink("st1.webp");
+            } else {
+              if (_0x360ce2 === "warn") {
+                const {
+                  getWarnCountByJID: _0x929622,
+                  ajouterUtilisateurAvecWarnCount: _0x10aad9
+                } = require('./bdd/warn');
+                let _0x3c1839 = await _0x929622(_0x19b3a0);
+                let _0x4ee8dc = conf.WARN_COUNT;
+                if (_0x3c1839 >= _0x4ee8dc) {
+                  var _0x3dce1e = "link detected , you will be remove because of reaching warn-limit";
+                  await _0xf78a87.sendMessage(_0x56ba16, {
+                    'text': _0x3dce1e,
+                    'mentions': [_0x19b3a0]
+                  }, {
+                    'quoted': _0x4c77a4
+                  });
+                  await _0xf78a87.groupParticipantsUpdate(_0x56ba16, [_0x19b3a0], "remove");
+                  await _0xf78a87.sendMessage(_0x56ba16, {
+                    'delete': _0x57d055
+                  });
+                } else {
+                  var _0x5dfdea = _0x4ee8dc - _0x3c1839;
+                  var _0x28f434 = "Link detected , your warn_count was upgrade ;\n rest : " + _0x5dfdea + " ";
+                  await _0x10aad9(_0x19b3a0);
+                  await _0xf78a87.sendMessage(_0x56ba16, {
+                    'text': _0x28f434,
+                    'mentions': [_0x19b3a0]
+                  }, {
+                    'quoted': _0x4c77a4
+                  });
+                  await _0xf78a87.sendMessage(_0x56ba16, {
+                    'delete': _0x57d055
+                  });
+                }
+              }
+            }
+          }
+        }
+      } catch (_0x250d7f) {
+        console.log("bdd err " + _0x250d7f);
+      }
+      try {
+        const _0x2b5683 = _0x4c77a4.key?.['id']?.["startsWith"]('BAES') && _0x4c77a4.key?.['id']?.["length"] === 0x10;
+        const _0x301449 = _0x4c77a4.key?.['id']?.["startsWith"]("BAE5") && _0x4c77a4.key?.['id']?.['length'] === 0x10;
+        if (_0x2b5683 || _0x301449) {
+          if (_0x38342d === 'reactionMessage') {
+            console.log("Je ne reagis pas au reactions");
+            return;
+          }
+          ;
+          const _0x3dc4cd = await atbverifierEtatJid(_0x56ba16);
+          if (!_0x3dc4cd) {
+            return;
+          }
+          ;
+          if (_0x4f0765 || _0x19b3a0 === _0x4f6687) {
+            console.log("je fais rien");
+            return;
+          }
+          ;
+          const _0x263ebd = {
+            'remoteJid': _0x56ba16,
+            'fromMe': false,
+            'id': _0x4c77a4.key.id,
+            'participant': _0x19b3a0
+          };
+          var _0x4e639a = "bot detected, \n";
+          var _0x59ee8f = new Sticker("https://raw.githubusercontent.com/djalega8000/Zokou-MD/main/media/remover.gif", {
+            'pack': "Zoou-Md",
+            'author': conf.OWNER_NAME,
+            'type': StickerTypes.FULL,
+            'categories': ['🤩', '🎉'],
+            'id': '12345',
+            'quality': 0x32,
+            'background': "#000000"
+          });
+          await _0x59ee8f.toFile("st1.webp");
+          var _0x360ce2 = await atbrecupererActionJid(_0x56ba16);
+          if (_0x360ce2 === "remove") {
+            _0x4e639a += "message deleted \n @" + _0x19b3a0.split('@')[0x0] + " removed from group.";
+            await _0xf78a87.sendMessage(_0x56ba16, {
+              'sticker': fs.readFileSync("st1.webp")
+            });
+            0x0;
+            baileys_1.delay(0x320);
+            await _0xf78a87.sendMessage(_0x56ba16, {
+              'text': _0x4e639a,
+              'mentions': [_0x19b3a0]
+            }, {
+              'quoted': _0x4c77a4
+            });
+            try {
+              await _0xf78a87.groupParticipantsUpdate(_0x56ba16, [_0x19b3a0], 'remove');
+            } catch (_0x3acf25) {
+              console.log("antibot ") + _0x3acf25;
+            }
+            await _0xf78a87.sendMessage(_0x56ba16, {
+              'delete': _0x263ebd
+            });
+            await fs.unlink('st1.webp');
+          } else {
+            if (_0x360ce2 === "delete") {
+              _0x4e639a += "message delete \n @" + _0x19b3a0.split('@')[0x0] + " Avoid sending link.";
+              await _0xf78a87.sendMessage(_0x56ba16, {
+                'text': _0x4e639a,
+                'mentions': [_0x19b3a0]
+              }, {
+                'quoted': _0x4c77a4
+              });
+              await _0xf78a87.sendMessage(_0x56ba16, {
+                'delete': _0x263ebd
+              });
+              await fs.unlink("st1.webp");
+            } else {
+              if (_0x360ce2 === "warn") {
+                const {
+                  getWarnCountByJID: _0x5ae1fd,
+                  ajouterUtilisateurAvecWarnCount: _0x3a3227
+                } = require("./bdd/warn");
+                let _0x19cb19 = await _0x5ae1fd(_0x19b3a0);
+                let _0x347a13 = conf.WARN_COUNT;
+                if (_0x19cb19 >= _0x347a13) {
+                  var _0x3dce1e = "bot detected ;you will be remove because of reaching warn-limit";
+                  await _0xf78a87.sendMessage(_0x56ba16, {
+                    'text': _0x3dce1e,
+                    'mentions': [_0x19b3a0]
+                  }, {
+                    'quoted': _0x4c77a4
+                  });
+                  await _0xf78a87.groupParticipantsUpdate(_0x56ba16, [_0x19b3a0], "remove");
+                  await _0xf78a87.sendMessage(_0x56ba16, {
+                    'delete': _0x263ebd
+                  });
+                } else {
+                  var _0x5dfdea = _0x347a13 - _0x19cb19;
+                  var _0x28f434 = "bot detected , your warn_count was upgrade ;\n rest : " + _0x5dfdea + " ";
+                  await _0x3a3227(_0x19b3a0);
+                  await _0xf78a87.sendMessage(_0x56ba16, {
+                    'text': _0x28f434,
+                    'mentions': [_0x19b3a0]
+                  }, {
+                    'quoted': _0x4c77a4
+                  });
+                  await _0xf78a87.sendMessage(_0x56ba16, {
+                    'delete': _0x263ebd
+                  });
+                }
+              }
+            }
+          }
+        }
+      } catch (_0x4e1246) {
+        console.log(".... " + _0x4e1246);
+      }
+      if (_0x362812) {
+        const _0x51c016 = evt.cm.find(_0x5dce6c => _0x5dce6c.nomCom === _0x2c0823);
+        if (_0x51c016) {
+          try {
+            if (conf.MODE.toLocaleLowerCase() != 'yes' && !_0x5a78ec) {
+              return;
+            }
+            if (!_0x5a78ec && _0x56ba16 === _0x19b3a0 && conf.PM_PERMIT === 'yes') {
+              _0x5c197a("You don't have acces to commands here");
+              return;
+            }
+            if (!_0x5a78ec && _0x3c4e15) {
+              let _0x513f7a = await isGroupBanned(_0x56ba16);
+              if (_0x513f7a) {
+                return;
+              }
+            }
+            if (!_0x4f0765 && _0x3c4e15) {
+              let _0x8faddc = await isGroupOnlyAdmin(_0x56ba16);
+              if (_0x8faddc) {
+                return;
+              }
+            }
+            if (!_0x5a78ec) {
+              let _0x415719 = await isUserBanned(_0x19b3a0);
+              if (_0x415719) {
+                _0x5c197a("You are banned from bot commands");
+                return;
+              }
+            }
+            reagir(_0x56ba16, _0xf78a87, _0x4c77a4, _0x51c016.reaction);
+            _0x51c016.fonction(_0x56ba16, _0xf78a87, _0x4aaf08);
+          } catch (_0x4da9ad) {
+            console.log("😡😡 " + _0x4da9ad);
+            _0xf78a87.sendMessage(_0x56ba16, {
+              'text': "😡😡 " + _0x4da9ad
+            }, {
+              'quoted': _0x4c77a4
+            });
+          }
+        }
+      }
+    });
+    const {
+      recupevents: _0x3917c8
+    } = require("./bdd/welcome");
+    _0xf78a87.ev.on("group-participants.update", async _0x2d4ff0 => {
+      console.log(_0x2d4ff0);
+      let _0x1f7dd8;
+      try {
+        _0x1f7dd8 = await _0xf78a87.profilePictureUrl(_0x2d4ff0.id, "image");
+      } catch {
+        _0x1f7dd8 = '';
+      }
+      try {
+        const _0x442c6f = await _0xf78a87.groupMetadata(_0x2d4ff0.id);
+        if (_0x2d4ff0.action == "add" && (await _0x3917c8(_0x2d4ff0.id, 'welcome')) == 'on') {
+          let _0x4cf3d4 = "*HANS WELCOME MESSAGE*";
+          let _0x80123d = _0x2d4ff0.participants;
+          for (let _0x466772 of _0x80123d) {
+            _0x4cf3d4 += " \n❒ *Hey* 🖐️ @" + _0x466772.split('@')[0x0] + " WELCOME TO OUR GROUP. \n\n";
+          }
+          _0x4cf3d4 += "❒ *READ THE GROUP DESCRIPTION TO AVOID GETTING REMOVED* ";
+          _0xf78a87.sendMessage(_0x2d4ff0.id, {
+            'image': {
+              'url': _0x1f7dd8
+            },
+            'caption': _0x4cf3d4,
+            'mentions': _0x80123d
+          });
+        } else {
+          if (_0x2d4ff0.action == "remove" && (await _0x3917c8(_0x2d4ff0.id, "goodbye")) == 'on') {
+            let _0x450444 = "one or somes member(s) left group;\n";
+            let _0x1a2615 = _0x2d4ff0.participants;
+            for (let _0x18ab7f of _0x1a2615) {
+              _0x450444 += '@' + _0x18ab7f.split('@')[0x0] + "\n";
+            }
+            _0xf78a87.sendMessage(_0x2d4ff0.id, {
+              'text': _0x450444,
+              'mentions': _0x1a2615
+            });
+          } else {
+            if (_0x2d4ff0.action == "promote" && (await _0x3917c8(_0x2d4ff0.id, "antipromote")) == 'on') {
+              if (_0x2d4ff0.author == _0x442c6f.owner || _0x2d4ff0.author == conf.NUMERO_OWNER + "@s.whatsapp.net" || _0x2d4ff0.author == decodeJid(_0xf78a87.user.id) || _0x2d4ff0.author == _0x2d4ff0.participants[0x0]) {
+                console.log("Cas de superUser je fais rien");
+                return;
+              }
+              ;
+              await _0xf78a87.groupParticipantsUpdate(_0x2d4ff0.id, [_0x2d4ff0.author, _0x2d4ff0.participants[0x0]], "demote");
+              _0xf78a87.sendMessage(_0x2d4ff0.id, {
+                'text': '@' + _0x2d4ff0.author.split('@')[0x0] + " has violated the anti-promotion rule, therefore both " + _0x2d4ff0.author.split('@')[0x0] + " and @" + _0x2d4ff0.participants[0x0].split('@')[0x0] + " have been removed from administrative rights.",
+                'mentions': [_0x2d4ff0.author, _0x2d4ff0.participants[0x0]]
+              });
+            } else {
+              if (_0x2d4ff0.action == "demote" && (await _0x3917c8(_0x2d4ff0.id, "antidemote")) == 'on') {
+                if (_0x2d4ff0.author == _0x442c6f.owner || _0x2d4ff0.author == conf.NUMERO_OWNER + '@s.whatsapp.net' || _0x2d4ff0.author == decodeJid(_0xf78a87.user.id) || _0x2d4ff0.author == _0x2d4ff0.participants[0x0]) {
+                  console.log("Cas de superUser je fais rien");
+                  return;
+                }
+                ;
+                await _0xf78a87.groupParticipantsUpdate(_0x2d4ff0.id, [_0x2d4ff0.author], "demote");
+                await _0xf78a87.groupParticipantsUpdate(_0x2d4ff0.id, [_0x2d4ff0.participants[0x0]], 'promote');
+                _0xf78a87.sendMessage(_0x2d4ff0.id, {
+                  'text': '@' + _0x2d4ff0.author.split('@')[0x0] + " has violated the anti-demotion rule by removing @" + _0x2d4ff0.participants[0x0].split('@')[0x0] + ". Consequently, he has been stripped of administrative rights.",
+                  'mentions': [_0x2d4ff0.author, _0x2d4ff0.participants[0x0]]
+                });
+              }
+            }
+          }
+        }
+      } catch (_0x47770e) {
+        console.error(_0x47770e);
+      }
+    });
+    async function _0x4eb9f4() {
+      const _0x3457b1 = require("node-cron");
+      const {
+        getCron: _0x54a16a
+      } = require("./bdd/cron");
+      let _0x561332 = await _0x54a16a();
+      console.log(_0x561332);
+      if (_0x561332.length > 0x0) {
+        for (let _0x3c4a60 = 0x0; _0x3c4a60 < _0x561332.length; _0x3c4a60++) {
+          if (_0x561332[_0x3c4a60].mute_at != null) {
+            let _0x244c17 = _0x561332[_0x3c4a60].mute_at.split(':');
+            console.log("etablissement d'un automute pour " + _0x561332[_0x3c4a60].group_id + " a " + _0x244c17[0x0] + " H " + _0x244c17[0x1]);
+            _0x3457b1.schedule(_0x244c17[0x1] + " " + _0x244c17[0x0] + " * * *", async () => {
+              await _0xf78a87.groupSettingUpdate(_0x561332[_0x3c4a60].group_id, "announcement");
+              _0xf78a87.sendMessage(_0x561332[_0x3c4a60].group_id, {
+                'image': {
+                  'url': "./media/chrono.webp"
+                },
+                'caption': "Hello, it's time to close the group; sayonara."
+              });
+            }, {
+              'timezone': 'Africa/Nairobi'
+            });
+          }
+          if (_0x561332[_0x3c4a60].unmute_at != null) {
+            let _0x1eb276 = _0x561332[_0x3c4a60].unmute_at.split(':');
+            console.log("etablissement d'un autounmute pour " + _0x1eb276[0x0] + " H " + _0x1eb276[0x1] + " ");
+            _0x3457b1.schedule(_0x1eb276[0x1] + " " + _0x1eb276[0x0] + " * * *", async () => {
+              await _0xf78a87.groupSettingUpdate(_0x561332[_0x3c4a60].group_id, 'not_announcement');
+              _0xf78a87.sendMessage(_0x561332[_0x3c4a60].group_id, {
+                'image': {
+                  'url': "./media/chrono.webp"
+                },
+                'caption': "Good morning; It's time to open the group."
+              });
+            }, {
+              'timezone': "Africa/Nairobi"
+            });
+          }
+        }
+      } else {
+        console.log("Les crons n'ont pas été activés");
+      }
+      return;
+    }
+    _0xf78a87.ev.on('contacts.upsert', async _0x4da5ba => {
+      const _0x56ea0e = _0x4ecac0 => {
+        for (const _0x96d882 of _0x4ecac0) {
+          if (store.contacts[_0x96d882.id]) {
+            Object.assign(store.contacts[_0x96d882.id], _0x96d882);
+          } else {
+            store.contacts[_0x96d882.id] = _0x96d882;
+          }
+        }
+        return;
+      };
+      _0x56ea0e(_0x4da5ba);
+    });
+    _0xf78a87.ev.on('connection.update', async _0x27d47d => {
+      const {
+        lastDisconnect: _0x13d461,
+        connection: _0x34734f
+      } = _0x27d47d;
+      if (_0x34734f === "connecting") {
+        console.log("ℹ️ Hans is connecting...");
+      } else {
+        if (_0x34734f === "open") {
+          console.log("✅ Hans Connected to WhatsApp! ☺️");
+          console.log('--');
+          0x0;
+          await baileys_1.delay(0xc8);
+          console.log("------");
+          0x0;
+          await baileys_1.delay(0x12c);
+          console.log("------------------/-----");
+          console.log("Hans Md is Online 🕸\n\n");
+          console.log("Loading Bmw Commands ...\n");
+          fs.readdirSync(__dirname + "/commandes").forEach(_0x38cb02 => {
+            if (path.extname(_0x38cb02).toLowerCase() == '.js') {
+              try {
+                require(__dirname + "/commandes/" + _0x38cb02);
+                console.log(_0x38cb02 + " Installed Successfully✔️");
+              } catch (_0x44f1d2) {
+                console.log(_0x38cb02 + " could not be installed due to : " + _0x44f1d2);
+              }
+              0x0;
+              baileys_1.delay(0x12c);
+            }
+          });
+          0x0;
+          baileys_1.delay(0x2bc);
+          var _0x1793b6;
+          if (conf.MODE.toLocaleLowerCase() === "yes") {
+            _0x1793b6 = "public";
+          } else if (conf.MODE.toLocaleLowerCase() === 'no') {
+            _0x1793b6 = "private";
+          } else {
+            _0x1793b6 = "undefined";
+          }
+          console.log("Commands Installation Completed ✅");
+          await _0x4eb9f4();
+          if (conf.DP.toLowerCase() === 'yes') {
+            let _0xac2a75 = " ⁠⁠⁠⁠\n╔═━━━━════━━━─━─➳ \n│🌏 *ʜᴀɴs-ᴍᴅ-ɪs-ᴄᴏɴɴᴇᴄᴛᴇᴅ-ᴏɴ-ʏᴏᴜʀ-ᴡʜᴀᴛsᴀᴘᴘ*\n╚═━━━━════━━━─━─➳\n│💫 ᴘʀᴇғɪx: *[ " + prefixe + " ]*\n│⭕ ᴍᴏᴅᴇ: *" + _0x1793b6 + "*\n╚═━━━━════━━━─━─➳\n\n                \n                \n                 ";
+            await _0xf78a87.sendMessage(_0xf78a87.user.id, {
+              'text': _0xac2a75
+            });
+          }
+        } else {
+          if (_0x34734f == "close") {
+            let _0x5377aa = new boom_1.Boom(_0x13d461?.["error"])?.["output"]["statusCode"];
+            if (_0x5377aa === baileys_1.DisconnectReason.badSession) {
+              console.log("Session id error, rescan again...");
+            } else {
+              if (_0x5377aa === baileys_1.DisconnectReason.connectionClosed) {
+                console.log("!!! connexion fermée, reconnexion en cours ...");
+                _0x4b6795();
+              } else {
+                if (_0x5377aa === baileys_1.DisconnectReason.connectionLost) {
+                  console.log("connection error 😞 ,,, trying to reconnect... ");
+                  _0x4b6795();
+                } else {
+                  if (_0x5377aa === baileys_1.DisconnectReason?.["connectionReplaced"]) {
+                    console.log("connexion réplacée ,,, une sesssion est déjà ouverte veuillez la fermer svp !!!");
+                  } else {
+                    if (_0x5377aa === baileys_1.DisconnectReason.loggedOut) {
+                      console.log("vous êtes déconnecté,,, veuillez rescanner le code qr svp");
+                    } else {
+                      if (_0x5377aa === baileys_1.DisconnectReason.restartRequired) {
+                        console.log("redémarrage en cours ▶️");
+                        _0x4b6795();
+                      } else {
+                        console.log("redemarrage sur le coup de l'erreur  ", _0x5377aa);
+                        const {
+                          exec: _0x188683
+                        } = require("child_process");
+                        _0x188683("pm2 restart all");
+                      }
+                    }
+                  }
+                }
+              }
+            }
+            console.log("hum " + _0x34734f);
+            _0x4b6795();
+          }
+        }
+      }
+    });
+    _0xf78a87.ev.on("creds.update", _0x5171fb);
+    _0xf78a87.downloadAndSaveMediaMessage = async (_0x306150, _0x98a048 = '', _0x4765b9 = true) => {
+      let _0xad6cf = _0x306150.msg ? _0x306150.msg : _0x306150;
+      let _0xcde04d = (_0x306150.msg || _0x306150).mimetype || '';
+      let _0x4e1b46 = _0x306150.mtype ? _0x306150.mtype.replace(/Message/gi, '') : _0xcde04d.split('/')[0x0];
+      0x0;
+      const _0x513757 = await baileys_1.downloadContentFromMessage(_0xad6cf, _0x4e1b46);
+      let _0x5af7e5 = Buffer.from([]);
+      for await (const _0x2851db of _0x513757) {
+        _0x5af7e5 = Buffer.concat([_0x5af7e5, _0x2851db]);
+      }
+      let _0x36e709 = await FileType.fromBuffer(_0x5af7e5);
+      let _0x557b00 = './' + _0x98a048 + '.' + _0x36e709.ext;
+      await fs.writeFileSync(_0x557b00, _0x5af7e5);
+      return _0x557b00;
+    };
+    _0xf78a87.awaitForMessage = async (_0x3e7712 = {}) => {
+      return new Promise((_0x3c8632, _0x549ecd) => {
+        if (typeof _0x3e7712 !== "object") {
+          _0x549ecd(new Error("Options must be an object"));
+        }
+        if (typeof _0x3e7712.sender !== "string") {
+          _0x549ecd(new Error("Sender must be a string"));
+        }
+        if (typeof _0x3e7712.chatJid !== 'string') {
+          _0x549ecd(new Error("ChatJid must be a string"));
+        }
+        if (_0x3e7712.timeout && typeof _0x3e7712.timeout !== "number") {
+          _0x549ecd(new Error("Timeout must be a number"));
+        }
+        if (_0x3e7712.filter && typeof _0x3e7712.filter !== "function") {
+          _0x549ecd(new Error("Filter must be a function"));
+        }
+        const _0x39bb52 = _0x3e7712?.['timeout'] || undefined;
+        const _0x1bd0f3 = _0x3e7712?.["filter"] || (() => true);
+        let _0x3f7ab5 = undefined;
+        let _0x245871 = _0xa71890 => {
+          let {
+            type: _0x55f553,
+            messages: _0x2ddd1d
+          } = _0xa71890;
+          if (_0x55f553 == "notify") {
+            for (let _0x4e8040 of _0x2ddd1d) {
+              const _0x5568a9 = _0x4e8040.key.fromMe;
+              const _0x170153 = _0x4e8040.key.remoteJid;
+              const _0x51296e = _0x170153.endsWith("@g.us");
+              const _0x27e770 = _0x170153 == "status@broadcast";
+              const _0x4ba8a1 = _0x5568a9 ? _0xf78a87.user.id.replace(/:.*@/g, '@') : _0x51296e || _0x27e770 ? _0x4e8040.key.participant.replace(/:.*@/g, '@') : _0x170153;
+              if (_0x4ba8a1 == _0x3e7712.sender && _0x170153 == _0x3e7712.chatJid && _0x1bd0f3(_0x4e8040)) {
+                _0xf78a87.ev.off("messages.upsert", _0x245871);
+                clearTimeout(_0x3f7ab5);
+                _0x3c8632(_0x4e8040);
+              }
+            }
+          }
+        };
+        _0xf78a87.ev.on('messages.upsert', _0x245871);
+        if (_0x39bb52) {
+          _0x3f7ab5 = setTimeout(() => {
+            _0xf78a87.ev.off('messages.upsert', _0x245871);
+            _0x549ecd(new Error("Timeout"));
+          }, _0x39bb52);
+        }
+      });
+    };
+    return _0xf78a87;
+  }
+  let _0x5ead48 = require.resolve(__filename);
+  fs.watchFile(_0x5ead48, () => {
+    fs.unwatchFile(_0x5ead48);
+    console.log("mise à jour " + __filename);
+    delete require.cache[_0x5ead48];
+    require(_0x5ead48);
+  });
+  _0x4b6795();
+}, 0x1388);
