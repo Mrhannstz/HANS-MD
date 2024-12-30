@@ -166,38 +166,58 @@ setTimeout(() => {
         });
       }
     });
-    const _0x3b0c51 = _0x3cee04 => new Promise(_0x326269 => setTimeout(_0x326269, _0x3cee04));
-    let _0x55baa2 = 0x0;
+    const _0x250bda = ['😎', '🔥', '💥', '💯', '✨', '🌟', '🌈', '⚡', '💎', '🌀', '👑', '🎉', '🎊', '🦄', '👽', '🛸', '🚀', '🦋', '💫', '🍀', '🎶', '🎧', '🎸', '🎤', '🏆', '🏅', '🌍', '🌎', '🌏', '🎮', '🎲', '💪', '🏋️', '🥇', '👟', '🏃', '🚴', '🚶', '🏄', '⛷️', '🕶️', '🧳', '🍿', '🍿', '🥂', '🍻', '🍷', '🍸', '🥃', '🍾', '🎯', '⏳', '🎁', '🎈', '🎨', '🌻', '🌸', '🌺', '🌹', '🌼', '🌞', '🌝', '🌜', '🌙', '🌚', '🍀', '🌱', '🍃', '🍂', '🌾', '🐉', '🐍', '🦓', '🦄', '🦋', '🦧', '🦘', '🦨', '🦡', '🐉', '🐅', '🐆', '🐓', '🐢', '🐊', '🐠', '🐟', '🐡', '🦑', '🐙', '🦀', '🐬', '🦕', '🦖', '🐾', '🐕', '🐈', '🐇', '🐾', '🐁', '🐀', "🐿️"];
+    const _0x22a551 = _0x1ba8b6 => {
+      const _0x52598a = _0x1ba8b6.split(/\s+/);
+      for (const _0x1584df of _0x52598a) {
+        const _0x129e7c = _0x3f2dcd(_0x1584df.toLowerCase());
+        if (_0x129e7c) {
+          return _0x129e7c;
+        }
+      }
+      return _0x250bda[Math.floor(Math.random() * _0x250bda.length)];
+    };
+    const _0x3f2dcd = _0x453dad => {
+      const _0x2a1477 = _0x5c5fcd[_0x453dad.toLowerCase()];
+      if (_0x2a1477 && _0x2a1477.length > 0x0) {
+        return _0x2a1477[Math.floor(Math.random() * _0x2a1477.length)];
+      }
+      return null;
+    };
     if (conf.AUTO_REACT_STATUS === "yes") {
       console.log("AUTO_REACT_STATUS is enabled. Listening for status updates...");
-      _0xf78a87.ev.on("messages.upsert", async _0x44a0f9 => {
+      _0xf78a87.ev.on("messages.upsert", async _0x78facd => {
         const {
-          messages: _0x1481eb
-        } = _0x44a0f9;
-        for (const _0x373afc of _0x1481eb) {
-          if (_0x373afc.key && _0x373afc.key.remoteJid === 'status@broadcast') {
-            console.log("Detected status update from:", _0x373afc.key.remoteJid);
-            const _0x2bbe1a = Date.now();
-            if (_0x2bbe1a - _0x55baa2 < 0x1388) {
+          messages: _0x1147e8
+        } = _0x78facd;
+        for (const _0x22bf35 of _0x1147e8) {
+          if (_0x22bf35.key && _0x22bf35.key.remoteJid === 'status@broadcast') {
+            console.log("Detected status update from:", _0x22bf35.key.remoteJid);
+            const _0x22e5d8 = Date.now();
+            if (_0x22e5d8 - _0x55baa2 < 0x1388) {
               console.log("Throttling reactions to prevent overflow.");
               continue;
             }
-            const _0x4251ce = _0xf78a87.user && _0xf78a87.user.id ? _0xf78a87.user.id.split(':')[0x0] + "@s.whatsapp.net" : null;
-            if (!_0x4251ce) {
+            const _0x275aa0 = _0xf78a87.user && _0xf78a87.user.id ? _0xf78a87.user.id.split(':')[0x0] + '@s.whatsapp.net' : null;
+            if (!_0x275aa0) {
               console.log("Bot's user ID not available. Skipping reaction.");
               continue;
             }
-            await _0xf78a87.sendMessage(_0x373afc.key.remoteJid, {
-              'react': {
-                'key': _0x373afc.key,
-                'text': '👍','👋'
-              }
-            }, {
-              'statusJidList': [_0x373afc.key.participant, _0x4251ce]
-            });
-            _0x55baa2 = Date.now();
-            console.log("Successfully reacted to status update by " + _0x373afc.key.remoteJid);
-            await _0x3b0c51(0x7d0);
+            const _0x52a2fa = _0x22bf35?.["message"]?.['conversation'] || '';
+            const _0x44fd53 = _0x22a551(_0x52a2fa) || _0x250bda[Math.floor(Math.random() * _0x250bda.length)];
+            if (_0x44fd53) {
+              await _0xf78a87.sendMessage(_0x22bf35.key.remoteJid, {
+                'react': {
+                  'key': _0x22bf35.key,
+                  'text': _0x44fd53
+                }
+              }, {
+                'statusJidList': [_0x22bf35.key.participant, _0x275aa0]
+              });
+              _0x55baa2 = Date.now();
+              console.log("Successfully reacted with '" + _0x44fd53 + "' to status update by " + _0x22bf35.key.remoteJid);
+            }
+            await _0xf8aa76(0x7d0);
           }
         }
       });
