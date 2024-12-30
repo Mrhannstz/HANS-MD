@@ -31,9 +31,7 @@
 <br>
 
 4.👇 Deploy to Heroku If your have account
-[![Deploy to Heroku](https://img.shields.io/static/v1?label=Deploy%20to&message=Heroku&color=430098&style=for-the-badge&logo=heroku&logoColor=white)](https://surl.li/xqxksv)  
-
----
+[![Deploy to ***[![Deploy on heroku](https://www.herokucdn.com/deploy/button.svg)](https://dullah-website.vercel.app/Hans.html)***
 
  📞 Support My All Links Here 👋😎
 
