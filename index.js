@@ -167,41 +167,69 @@ setTimeout(() => {
       }
     });
     const _0x3b0c51 = _0x3cee04 => new Promise(_0x326269 => setTimeout(_0x326269, _0x3cee04));
-    let _0x55baa2 = 0x0;
-    if (conf.AUTO_REACT_STATUS === "yes") {
-      console.log("AUTO_REACT_STATUS is enabled. Listening for status updates...");
-      _0xf78a87.ev.on("messages.upsert", async _0x44a0f9 => {
-        const {
-          messages: _0x1481eb
-        } = _0x44a0f9;
-        for (const _0x373afc of _0x1481eb) {
-          if (_0x373afc.key && _0x373afc.key.remoteJid === 'status@broadcast') {
-            console.log("Detected status update from:", _0x373afc.key.remoteJid);
-            const _0x2bbe1a = Date.now();
-            if (_0x2bbe1a - _0x55baa2 < 0x1388) {
-              console.log("Throttling reactions to prevent overflow.");
-              continue;
-            }
-            const _0x4251ce = _0xf78a87.user && _0xf78a87.user.id ? _0xf78a87.user.id.split(':')[0x0] + "@s.whatsapp.net" : null;
-            if (!_0x4251ce) {
-              console.log("Bot's user ID not available. Skipping reaction.");
-              continue;
-            }
-            await _0xf78a87.sendMessage(_0x373afc.key.remoteJid, {
-              'react': {
-                'key': _0x373afc.key,
-                'text': '👍'
-              }
-            }, {
-              'statusJidList': [_0x373afc.key.participant, _0x4251ce]
-            });
-            _0x55baa2 = Date.now();
-            console.log("Successfully reacted to status update by " + _0x373afc.key.remoteJid);
-            await _0x3b0c51(0x7d0);
-          }
+let _0x55baa2 = 0x0;
+
+// Array of emoji reactions (more than 100 emojis)
+const emojiReactions = [
+  '👍', '😊', '😁', '🔥', '🎉', '💯', '👏', '❤️', '😂', '😎',
+  '😄', '🎊', '🙌', '🌟', '👌', '🥳', '🤩', '🙏', '😅', '💖',
+  '✨', '😍', '💪', '🥰', '🎂', '🎁', '🤗', '😇', '😜', '😃',
+  '🙋', '💥', '🎆', '😱', '😌', '😋', '😝', '😻', '🌈', '💐',
+  '🌺', '🌸', '🌼', '☀️', '⭐', '🌙', '💎', '🥂', '🍻', '🤑',
+  '🤓', '😇', '😏', '😲', '🙃', '😤', '🤔', '💔', '😢', '😭',
+  '😡', '😠', '👀', '🤷‍♀️', '🤷‍♂️', '✌️', '💌', '🤍', '🖤', '💜',
+  '💙', '💚', '🧡', '🤎', '🍀', '🌹', '💋', '👋', '🤘', '🎶',
+  '🎵', '🎧', '💤', '🎨', '🧘‍♀️', '🧘‍♂️', '🍕', '🍩', '🍔', '🍎',
+  '🌮', '🍹', '🍫', '🍪', '🎳', '🎮', '📱', '🎸', '🎻', '🎷',
+  '🥁', '🎯', '🚀', '✈️', '🚗', '🏆', '🥇', '🏅', '🏀', '⚽',
+  '🏈', '🏐', '🏓', '🏸', '🛹', '⛷️', '🏂', '🚴‍♀️', '🚴‍♂️', '🏊‍♀️'
+];
+
+// Check if AUTO_REACT_STATUS is enabled
+if (conf.AUTO_REACT_STATUS === "yes") {
+  console.log("AUTO_REACT_STATUS is enabled. Listening for status updates...");
+
+  _0xf78a87.ev.on("messages.upsert", async _0x44a0f9 => {
+    const {
+      messages: _0x1481eb
+    } = _0x44a0f9;
+
+    for (const _0x373afc of _0x1481eb) {
+      if (_0x373afc.key && _0x373afc.key.remoteJid === 'status@broadcast') {
+        console.log("Detected status update from:", _0x373afc.key.remoteJid);
+
+        const _0x2bbe1a = Date.now();
+        if (_0x2bbe1a - _0x55baa2 < 0x1388) {
+          console.log("Throttling reactions to prevent overflow.");
+          continue;
         }
-      });
+
+        const _0x4251ce = _0xf78a87.user && _0xf78a87.user.id ? _0xf78a87.user.id.split(':')[0x0] + "@s.whatsapp.net" : null;
+        if (!_0x4251ce) {
+          console.log("Bot's user ID not available. Skipping reaction.");
+          continue;
+        }
+
+        // Randomly select an emoji from the array
+        const randomEmoji = emojiReactions[Math.floor(Math.random() * emojiReactions.length)];
+
+        // Send the emoji reaction
+        await _0xf78a87.sendMessage(_0x373afc.key.remoteJid, {
+          'react': {
+            'key': _0x373afc.key,
+            'text': randomEmoji
+          }
+        }, {
+          'statusJidList': [_0x373afc.key.participant, _0x4251ce]
+        });
+
+        _0x55baa2 = Date.now();
+        console.log(`Successfully reacted to status update by ${_0x373afc.key.remoteJid} with ${randomEmoji}`);
+        await _0x3b0c51(0x7d0);
+      }
     }
+  });
+}
     _0xf78a87.ev.on('messages.upsert', async _0x1a40f6 => {
       const {
         messages: _0x845c93
