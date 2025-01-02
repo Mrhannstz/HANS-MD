@@ -1,13 +1,3 @@
-const util = require('util');
-const fs = require('fs-extra');
-const { zokou } = require(__dirname + "/../framework/zokou");
-const { format } = require(__dirname + "/../framework/mesfonctions");
-const os = require("os");
-const moment = require("moment-timezone");
-const s = require(__dirname + "/../set");
-const more = String.fromCharCode(8206)
-const readmore = more.repeat(4001)
-
 zokou({ nomCom: "me2", categorie: "General" }, async (dest, zk, commandeOptions) => {
     let { ms, repondre, prefixe, nomAuteurMessage, mybotpic } = commandeOptions;
     let { cm } = require(__dirname + "/../framework//zokou");
@@ -44,7 +34,7 @@ zokou({ nomCom: "me2", categorie: "General" }, async (dest, zk, commandeOptions)
 `;
 
     for (const cat in coms) {
-        menuMsg += `*╭────✰${cat}`;
+        menuMsg += `*╭────✰* *${cat}* **`;
         for (const cmd of coms[cat]) {
             menuMsg += `  
 *┊✞︎* ${cmd}`;
@@ -54,39 +44,33 @@ zokou({ nomCom: "me2", categorie: "General" }, async (dest, zk, commandeOptions)
     }
 
     menuMsg += `
-     *𝑯𝑨𝑵𝑺-𝑴𝑫-𝑩𝑶𝑻-2025*                                    
-*✰════════════════✰*
+       ◇          ◇
+*—————🎗️🎗️🎗️🎗️—————*
+
+    *𝑯𝑨𝑵𝑺-𝑴𝑫-𝑩𝑶𝑻-2025*                                         
+*╰═════════════✰*
 `;
 
-    var lien = mybotpic();
-    const sourceUrl = "https://whatsapp.com/channel/0029VasiOoR3bbUw5aV4qB31";
+    const buttons = [
+        {
+            buttonId: 'view_channel',
+            buttonText: { displayText: 'View Channel' },
+            type: 2,
+            url: 'https://whatsapp.com/channel/0029VasiOoR3bbUw5aV4qB31' // Correct URL integration
+        }
+    ];
 
-    if (lien.match(/\.(mp4|gif)$/i)) {
-        try {
-            zk.sendMessage(dest, { 
-                video: { url: lien }, 
-                caption: infoMsg + menuMsg, 
-                footer: "Je suis *HANS-MD*, développé par Hanstz++", 
-                gifPlayback: true, 
-                sourceUrl: sourceUrl // Adding the view channel URL
-            }, { quoted: ms });
-        } catch (e) {
-            console.log("🥵🥵 Menu erreur " + e);
-            repondre("🥵🥵 Menu erreur " + e);
-        }
-    } else if (lien.match(/\.(jpeg|png|jpg)$/i)) {
-        try {
-            zk.sendMessage(dest, { 
-                image: { url: lien }, 
-                caption: infoMsg + menuMsg, 
-                footer: "*HansTz*",
-                sourceUrl: sourceUrl // Adding the view channel URL
-            }, { quoted: ms });
-        } catch (e) {
-            console.log("🥵🥵 Menu erreur " + e);
-            repondre("🥵🥵 Menu erreur " + e);
-        }
-    } else {
-        repondre(infoMsg + menuMsg + "\nSource: " + sourceUrl);
+    const templateMessage = {
+        text: infoMsg + menuMsg,
+        footer: 'Je suis *Zokou-MD*, développé par Djalega++',
+        templateButtons: buttons
+    };
+
+    try {
+        // Send the template message with the clickable URL
+        zk.sendMessage(dest, templateMessage, { quoted: ms });
+    } catch (e) {
+        console.log("🥵🥵 Menu erreur " + e);
+        repondre("🥵🥵 Menu erreur " + e);
     }
 });
