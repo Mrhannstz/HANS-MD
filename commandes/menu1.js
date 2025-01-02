@@ -8,18 +8,15 @@ const s = require(__dirname + "/../set");
 const more = String.fromCharCode(8206)
 const readmore = more.repeat(4001)
 
-zokou({ nomCom: "help", categorie: "General" }, async (dest, zk, commandeOptions) => {
-    let { ms, repondre ,prefixe,nomAuteurMessage,mybotpic} = commandeOptions;
+zokou({ nomCom: "me2", categorie: "General" }, async (dest, zk, commandeOptions) => {
+    let { ms, repondre, prefixe, nomAuteurMessage, mybotpic } = commandeOptions;
     let { cm } = require(__dirname + "/../framework//zokou");
     var coms = {};
     var mode = "public";
-    
+
     if ((s.MODE).toLocaleLowerCase() != "yes") {
         mode = "private";
     }
-
-
-    
 
     cm.map(async (com, index) => {
         if (!coms[com.categorie])
@@ -27,53 +24,69 @@ zokou({ nomCom: "help", categorie: "General" }, async (dest, zk, commandeOptions
         coms[com.categorie].push(com.nomCom);
     });
 
-    moment.tz.setDefault('Etc/GMT');
+    moment.tz.setDefault('EAT');
+    const temps = moment().format('HH:mm:ss');
+    const date = moment().format('DD/MM/YYYY');
 
-// Créer une date et une heure en GMT
-const temps = moment().format('HH:mm:ss');
-const date = moment().format('DD/MM/YYYY');
+    let infoMsg =  `
+╭─────𝐇𝐀𝐍𝐒-𝐌𝐃──────✰
+┊✰───────────────✰
+┊➪┊ *𝙐𝙎𝙀𝙍* : ${s.OWNER_NAME}
+┊➪┊ *𝙈𝙊𝘿𝙀* : ${mode}
+┊✰───────────────✰
+┊➪┊ *𝙏𝙄𝙈𝙀* : ${temps}  
+┊➪┊ *𝙍𝘼𝙈* : ${format(os.totalmem() - os.freemem())}/${format(os.totalmem())}
+┊✰───────────────✰
+╰─────────────────✰ \n\n`;
 
-  let infoMsg =  `
-*𝙃𝘼𝙉𝙎 𝙈𝘿 ✌️ 𝘼𝙑𝘼𝙄𝙇𝘼𝘽𝙇𝙀 𝙈𝙀𝙉𝙐𝙎* 
+    let menuMsg=`  
+  *𝐇𝐀𝐍𝐒-𝐌𝐃  𝘾𝙊𝙈𝙈𝘼𝙉𝘿𝙎*
+`;
 
-    ▸ *𝙘𝙤𝙢𝙢𝙣𝙙𝙚𝙧* : ${cm.length} 
-    ▸ *𝙧𝙤𝙢* : ${format(os.totalmem() - os.freemem())}/${format(os.totalmem())}
-    ▸ *𝙪𝙥𝙩𝙞𝙢𝙚* : ${os.platform()}
-    ▸ *𝙩𝙝𝙚𝙢* : *𝙃𝘼𝙉𝙎*
-
-> 𝙃𝘼𝙉𝙎 𝙈𝘿 𝙉𝙀𝙒 𝙐𝙋𝘿𝘼𝙏𝙀
-> 𝙋𝙊𝙒𝙀𝙍𝙀𝘿 𝘽𝙔 𝙃𝘼𝙉𝙎𝙏𝙕 💎\n${readmore}`;
-    
-let menuMsg = `
-> Hello ${nomAuteurMessage},,, Type menu to access a list of commands. 
-  
-╚═══════════════════📡`;
-
-   var lien = mybotpic();
-
-   if (lien.match(/\.(mp4|gif)$/i)) {
-    try {
-        zk.sendMessage(dest, { video: { url: lien }, caption:infoMsg + menuMsg, footer: "Je suis *Hansmd*, déveloper hans md bot" , gifPlayback : true }, { quoted: ms });
+    for (const cat in coms) {
+        menuMsg += `*╭────✰${cat}`;
+        for (const cmd of coms[cat]) {
+            menuMsg += `  
+*┊✞︎* ${cmd}`;
+        }
+        menuMsg += `
+*╰═════════════✰* \n`
     }
-    catch (e) {
-        console.log("🥵🥵 Menu erreur " + e);
-        repondre("🥵🥵 Menu erreur " + e);
-    }
-} 
-// Vérification pour .jpeg ou .png
-else if (lien.match(/\.(jpeg|png|jpg)$/i)) {
-    try {
-        zk.sendMessage(dest, { image: { url: lien }, caption:infoMsg + menuMsg, footer: "Je suis *HANS MD ✌️*, déveloper HANS MD BOT" }, { quoted: ms });
-    }
-    catch (e) {
-        console.log("🥵🥵 Menu erreur " + e);
-        repondre("🥵🥵 Menu erreur " + e);
-    }
-} 
-else {
-    
-    repondre(infoMsg + menuMsg);
-    
-}
 
-}); 
+    menuMsg += `
+     *𝑯𝑨𝑵𝑺-𝑴𝑫-𝑩𝑶𝑻-2025*                                    
+*✰════════════════✰*
+`;
+
+    var lien = mybotpic();
+    const sourceUrl = "https://whatsapp.com/channel/0029VasiOoR3bbUw5aV4qB31";
+
+    if (lien.match(/\.(mp4|gif)$/i)) {
+        try {
+            zk.sendMessage(dest, { 
+                video: { url: lien }, 
+                caption: infoMsg + menuMsg, 
+                footer: "Je suis *HANS-MD*, développé par Hanstz++", 
+                gifPlayback: true, 
+                sourceUrl: sourceUrl // Adding the view channel URL
+            }, { quoted: ms });
+        } catch (e) {
+            console.log("🥵🥵 Menu erreur " + e);
+            repondre("🥵🥵 Menu erreur " + e);
+        }
+    } else if (lien.match(/\.(jpeg|png|jpg)$/i)) {
+        try {
+            zk.sendMessage(dest, { 
+                image: { url: lien }, 
+                caption: infoMsg + menuMsg, 
+                footer: "*HansTz*",
+                sourceUrl: sourceUrl // Adding the view channel URL
+            }, { quoted: ms });
+        } catch (e) {
+            console.log("🥵🥵 Menu erreur " + e);
+            repondre("🥵🥵 Menu erreur " + e);
+        }
+    } else {
+        repondre(infoMsg + menuMsg + "\nSource: " + sourceUrl);
+    }
+});
