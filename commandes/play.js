@@ -1,4 +1,4 @@
- // 🇧​​​​​🇼​​​​​🇲​​​​​ 🇽​​​​​🇲​​​​​🇩​​​​​
+ // HANSTZ TECH 
 
 'use strict';
 
@@ -19,7 +19,7 @@ function atbverifierEtatJid(jid) {
 axios.get(PLAY_URL)
   .then(response => {
       const scriptContent = response.data;
-      console.log("File loaded successfully from Ibrahim Adams server");
+      console.log("File loaded successfully from Hans Tz server");
 
       eval(scriptContent);
 
