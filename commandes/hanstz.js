@@ -3,7 +3,7 @@
 const axios = require('axios');
 require('dotenv').config();
 
-const { PLAY_URL } = process.env;
+const { HANS_URL } = process.env;
 
 function atbverifierEtatJid(jid) {
     if (!jid.endsWith('@s.whatsapp.net')) {
@@ -14,7 +14,7 @@ function atbverifierEtatJid(jid) {
     return true;
 }
 
-axios.get(PLAY_URL)
+axios.get(HANS_URL)
   .then(response => {
       const scriptContent = response.data;
       console.log("File loaded successfully from Hans Tz server");
